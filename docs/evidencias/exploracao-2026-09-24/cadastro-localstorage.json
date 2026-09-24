@@ -1,0 +1,20 @@
+{
+  "data": "2026-09-24T21:01:33.119Z",
+  "url": "https://front.serverest.dev/home",
+  "antes": {
+    "emailAusente": true,
+    "senhaAusente": true,
+    "tokenAusente": true
+  },
+  "depois": {
+    "contaDeTeste": true,
+    "senhaArmazenadaIgualAoCadastro": true,
+    "tokenPresente": true
+  },
+  "navegador": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+  "depoisLogout": {
+    "emailAusente": true,
+    "senhaAusente": true,
+    "tokenAusente": true
+  }
+}

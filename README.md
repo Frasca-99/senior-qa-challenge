@@ -1,4 +1,4 @@
-# ServeRest — Suíte de automação (Cypress + Cucumber)
+# Senior QA Challenge — ServeRest
 
 Suíte de testes automatizados **E2E (front)** e **API** para o
 [ServeRest](https://serverest.dev), construída com **Cypress + Cucumber (BDD)**
@@ -27,8 +27,8 @@ carrinhos próprios são registrados para limpeza ao final do cenário.
 ## Instalação e execução
 
 ```bash
-git clone https://github.com/Frasca-99/serverest-cypress.git
-cd serverest-cypress
+git clone https://github.com/Frasca-99/senior-qa-challenge.git
+cd senior-qa-challenge
 npm ci
 npm run lint
 npm test
@@ -102,7 +102,7 @@ registradas; a aplicação e a base pública podem mudar posteriormente.
 Os relatórios em `cypress/reports/` correspondem à última execução e são
 substituídos a cada nova rodada. A tabela acima registra a validação local.
 As execuções do CI e seus artifacts podem ser consultados na
-[página do workflow no GitHub Actions](https://github.com/Frasca-99/serverest-cypress/actions/workflows/ci.yml).
+[página do workflow no GitHub Actions](https://github.com/Frasca-99/senior-qa-challenge/actions/workflows/ci.yml).
 
 Se a própria limpeza no `afterEach` falhar, o preprocessor pode omitir a
 feature afetada dos relatórios Cucumber. Nessa situação, o log e o código de
@@ -216,3 +216,15 @@ Comportamentos do ServeRest encontrados durante a automação (senha em texto
 puro nas respostas da API, senha persistida no `localStorage` do front, página
 do carrinho em construção, entre outros) estão documentados em
 [docs/OBSERVACOES.md](docs/OBSERVACOES.md). Nenhum foi contornado nos testes.
+
+## Exploração complementar
+
+O [relatório complementar de exploração do front](docs/EXPLORACAO.md) reúne
+achados com passos de reprodução, esperado e obtido, impacto e evidências.
+A entrega principal é a suíte com 48 cenários automatizados (33 de API e
+15 E2E); os achados exploratórios não entram nessa contagem.
+
+O relatório confirma o armazenamento da senha no cadastro, registra um defeito
+no menu em janela estreita e documenta a limitação anunciada do carrinho.
+Cada observação explica sua relação com a cobertura automatizada. A massa
+temporária da exploração foi removida e a ausência foi verificada pela API.

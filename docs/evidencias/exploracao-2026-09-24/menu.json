@@ -1,0 +1,83 @@
+{
+  "data": "2026-09-24T21:04:00.864Z",
+  "navegador": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36",
+  "home": {
+    "antes": {
+      "altura": 760,
+      "expandido": "false",
+      "largura": 464
+    },
+    "depois": {
+      "altura": 760,
+      "expandido": "false",
+      "itens": [
+        {
+          "texto": "",
+          "visivel": true
+        },
+        {
+          "texto": "Home",
+          "visivel": false
+        },
+        {
+          "texto": "Lista de Compras",
+          "visivel": false
+        },
+        {
+          "texto": "Carrinho",
+          "visivel": false
+        },
+        {
+          "texto": "Logout",
+          "visivel": false
+        }
+      ],
+      "largura": 464
+    }
+  },
+  "carrinho": {
+    "altura": 760,
+    "expandido": "false",
+    "itens": [
+      {
+        "texto": "Home",
+        "visivel": false
+      },
+      {
+        "texto": "Lista de Compras",
+        "visivel": false
+      },
+      {
+        "texto": "Carrinho",
+        "visivel": false
+      }
+    ],
+    "largura": 464
+  },
+  "desktop": {
+    "altura": 800,
+    "itens": [
+      {
+        "texto": "",
+        "visivel": false
+      },
+      {
+        "texto": "Home",
+        "visivel": true
+      },
+      {
+        "texto": "Lista de Compras",
+        "visivel": true
+      },
+      {
+        "texto": "Carrinho",
+        "visivel": true
+      },
+      {
+        "texto": "Logout",
+        "visivel": true
+      }
+    ],
+    "largura": 1280
+  }
+}

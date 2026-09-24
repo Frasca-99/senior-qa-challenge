@@ -1,0 +1,28 @@
+{
+  "data": "2026-09-24T21:05:20.942551+00:00",
+  "usuariosVerificados": 4,
+  "produtosVerificados": 1,
+  "todosAusentes": true,
+  "verificacoes": [
+    {
+      "recurso": "produto temporário",
+      "ausenciaConfirmada": true
+    },
+    {
+      "recurso": "Exploracao QA Administrador",
+      "ausenciaConfirmada": true
+    },
+    {
+      "recurso": "Exploracao QA Conta A",
+      "ausenciaConfirmada": true
+    },
+    {
+      "recurso": "Exploracao QA Conta B",
+      "ausenciaConfirmada": true
+    },
+    {
+      "recurso": "Exploracao QA Cadastro",
+      "ausenciaConfirmada": true
+    }
+  ]
+}
