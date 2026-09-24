@@ -148,6 +148,8 @@ cypress/
     massa_de_dados.js     # Pré-condições: cria dados pela API e agenda a limpeza
 docs/
   OBSERVACOES.md          # Comportamentos da aplicação que merecem atenção
+  EXPLORACAO.md           # Relatório complementar de exploração do front
+  evidencias/             # Prints e registros técnicos da exploração
 .github/workflows/ci.yml  # Lint, auditoria, smoke em PR e regressão na main
 ```
 
