@@ -1,0 +1,95 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    # Execução semanal: a aplicação sob teste é pública e evolui de forma
+    # independente deste repositório, então a suíte precisa ser reexecutada
+    # mesmo sem mudanças no código.
+    - cron: "0 7 * * 1"
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    name: Lint e auditoria
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Lint (zero avisos)
+        run: npm run lint
+
+      - name: Auditoria de dependências
+        run: npm audit --audit-level=high
+
+  smoke:
+    name: Smoke (pull request)
+    if: github.event_name == 'pull_request'
+    needs: quality
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+
+      - name: Executar smoke
+        uses: cypress-io/github-action@v6
+        with:
+          command: npm run test:smoke
+
+      - name: Publicar relatório e evidências
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: smoke-${{ github.run_id }}
+          path: |
+            cypress/reports/
+            cypress/screenshots/
+          if-no-files-found: ignore
+          retention-days: 14
+
+  regression:
+    name: Regressão completa
+    if: github.event_name != 'pull_request'
+    needs: quality
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+
+      - name: Executar a suíte completa
+        uses: cypress-io/github-action@v6
+        with:
+          command: npm test
+
+      - name: Publicar relatório e evidências
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: regression-${{ github.run_id }}
+          path: |
+            cypress/reports/
+            cypress/screenshots/
+          if-no-files-found: ignore
+          retention-days: 30
