@@ -50,7 +50,7 @@ jobs:
           node-version-file: .nvmrc
 
       - name: Executar smoke
-        uses: cypress-io/github-action@v6
+        uses: cypress-io/github-action@v7
         with:
           command: npm run test:smoke
 
@@ -79,7 +79,7 @@ jobs:
           node-version-file: .nvmrc
 
       - name: Executar a suíte completa
-        uses: cypress-io/github-action@v6
+        uses: cypress-io/github-action@v7
         with:
           command: npm test
 
