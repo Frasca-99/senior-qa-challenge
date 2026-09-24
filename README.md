@@ -62,7 +62,8 @@ modo headless no macOS:
 | `npm ci` em cópia limpa | Instalação concluída | 2,09 s |
 | `npm run lint` | Sem erros ou avisos, inclusive na cópia limpa | — |
 | `npm audit --audit-level=high` | Zero vulnerabilidades reportadas | — |
-| `npm test` | 48 aprovados; nenhuma falha ou caso ignorado | 103,19 s |
+| `npm test` — primeira execução | 48 aprovados; nenhuma falha ou caso ignorado | 103,19 s |
+| `npm test` — segunda execução, mesmo código | 48 aprovados; nenhuma falha ou caso ignorado | 104,60 s |
 | `npm run test:smoke` após instalação limpa | 7 aprovados; nenhuma falha ou caso ignorado | 30,77 s |
 
 O `npm ci` emitiu avisos sobre a dependência transitiva `glob` e a política
@@ -76,14 +77,32 @@ cenários seguintes passaram ao consultar a API e confirmar a ausência de
 todos esses registros. O diagnóstico e suas evidências foram preservados
 localmente fora do repositório.
 
-Após a regressão e o smoke, consultas à API encontraram zero usuários com
+Também foram feitas três verificações pontuais em cópias isoladas, usando
+respostas e telas reais:
+
+| Verificação | Expectativa incorreta introduzida somente na cópia | Falha observada |
+| --- | --- | --- |
+| Status HTTP | Exigir 202 no cadastro de usuário | A asserção rejeitou o status 201 retornado |
+| Contrato AJV | Exigir `preco` como string no produto | O contrato rejeitou o valor numérico em `/preco` |
+| Preço na lista de compras | Somar R$ 1 ao valor esperado | A asserção rejeitou R$ 3.273 ao esperar R$ 3.274 |
+
+Cada execução reprovou o cenário selecionado com código de saída 1, pelo
+motivo esperado. Logs, relatórios e screenshots foram preservados localmente
+fora do repositório. Essas verificações confirmam a atuação dessas três
+asserções; não representam uma avaliação completa por testes de mutação.
+Nenhuma alteração das cópias entrou na entrega, e a segunda regressão acima
+foi executada com os 48 cenários originais.
+
+Após as regressões, o smoke e as verificações pontuais, consultas à API
+encontraram zero usuários com
 `serverest-tests.com.br` no e-mail e zero produtos com o sufixo de timestamp
 e identificador usado pela factory. Esses resultados retratam as execuções
 registradas; a aplicação e a base pública podem mudar posteriormente.
 
 Os relatórios em `cypress/reports/` correspondem à última execução e são
-substituídos a cada nova rodada. A validação acima foi local; a execução do
-workflow no GitHub Actions ainda depende da publicação do repositório.
+substituídos a cada nova rodada. A tabela acima registra a validação local.
+As execuções do CI e seus artifacts podem ser consultados na
+[página do workflow no GitHub Actions](https://github.com/Frasca-99/serverest-cypress/actions/workflows/ci.yml).
 
 Se a própria limpeza no `afterEach` falhar, o preprocessor pode omitir a
 feature afetada dos relatórios Cucumber. Nessa situação, o log e o código de
